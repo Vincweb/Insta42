@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+    wildfly:
+        build: ../
+        container_name: wildfly42
+        restart: always
+        ports:
+            - "8080:8080"
+        environment:
+            - IMAGE_STORE_PATH=/image
+        volumes:
+            - image-data:/image
+        links:
+            - redis:redis
+
+    redis:
+        image: redis
+        container_name: redis42
+        restart: always
+        ports:
+            - "6379:6379"
+
+    php-redis-admin:
+        image: faktiva/php-redis-admin
+        container_name: phpredisadmin42
+        restart: always
+        ports:
+            - "8090:80"
+        environment:
+            - PHPREDMIN_DATABASE_REDIS_0_HOST=redis
+        depends_on:
+            - redis
+
+volumes:
+  image-data:
