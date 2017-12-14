@@ -32,5 +32,14 @@ services:
         depends_on:
             - redis
 
+    apache-server:
+        image: httpd
+        container_name: apache42
+        restart: always
+        ports:
+            - "8070:80"
+        volumes:
+            - image-data:/usr/local/apache2/htdocs/
+
 volumes:
   image-data:

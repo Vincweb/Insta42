@@ -17,6 +17,8 @@ $ mvn clean package
 
 Lancement du serveur Wildfly
 ```
+$ cd docker
+$ docker-compose build --force
 $ docker-compose up
 ```
 
@@ -29,3 +31,7 @@ Accessible port localhost:8080
 ## PHP Redis Admin
 
 Accessible port localhost:8090
+
+## Serveur apache
+
+Accessible port localhost:8070
