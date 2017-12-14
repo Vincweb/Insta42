@@ -1,9 +1,9 @@
 # Serveur Application Intagram 42
 
 Contributeur :
-- Mathieu Turelier
-- Kevin Guiste
-- Cédric Zouaoui
+- Mathieu TURELIER
+- Kevin GUISTET
+- Cédric ZOUAOUI
 - Vincent CAUDRON
 
 ## Java Maven
