@@ -75,8 +75,8 @@ public class PublicationResourceRESTService {
                 url_docker = System.getenv("IMAGE_STORE_PATH");
             }
 
-            pub.setImage(IMAGE_URL+url_docker+imageName);
-            FileUtils.writeByteArrayToFile(new File(url_docker+"/"+imageName), img);
+            pub.setImage(IMAGE_URL+"/"+imageName);
+            FileUtils.writeByteArrayToFile(new File(url_docker+imageName), img);
             publications.updateImageName(pub);
         } finally {
         }
