@@ -4,6 +4,7 @@
 .cheatsheet.xml
 .project
 .vscode/
+*.iml
 
 # Ignore Maven
 target/

@@ -53,8 +53,8 @@ public class PublicationResourceRESTService {
     @Inject
     PublicationManager publications;
 
-    private String IMAGE_STORAGE_FILE = "C:\\Users\\Turel\\front-app\\target\\front-app.war";
-
+    private String IMAGE_STORAGE_FILE = "\\welcomePublication/";
+    private String IMAGE_URL = "http://192.168.99.100:8070/";
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -71,9 +71,14 @@ public class PublicationResourceRESTService {
             String imageName = "publication-" + id + ".jpg";
             pub.setImageName(imageName);
             pub.setImage("localhost:8080//front-app//"+ imageName);
-            FileUtils.writeByteArrayToFile(new File(imageName), img);
+            String url_docker = "/image/";
+            if (System.getenv("-DIMAGE_STORE_PATH") != null){
+                url_docker = System.getenv("-DIMAGE_STORE_PATH");
+            }
+
+            pub.setImage(IMAGE_URL+url_docker+imageName);
+            FileUtils.writeByteArrayToFile(new File("image/"+url_docker+"/"+imageName), img);
             publications.updateImageName(pub);
-            String pathName = System.getProperty("IMAGE_STORAGE_FILE", IMAGE_STORAGE_FILE);
         } finally {
         }
         return pub;
