@@ -42,7 +42,7 @@ services:
             - "8070:80"
         volumes:
             - image-data:/usr/local/apache2/htdocs/
-            - ./config/:/usr/local/apache2/htdocs/
+            - ../config/:/usr/local/apache2/htdocs/
 
 volumes:
   image-data:

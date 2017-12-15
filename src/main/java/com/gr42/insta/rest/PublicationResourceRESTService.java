@@ -68,7 +68,7 @@ public class PublicationResourceRESTService {
             InputStream inputStream = request.getFormDataMap().get("image").get(0).getBody(InputStream.class, null);
             if (inputStream.available() != 0)
                 img = IOUtils.toByteArray(inputStream);
-            String imageName = "publication-" + id + ".jpg";
+            String imageName = "publication-" + id + ".jpg"; // System.currentTimeMillis()
             pub.setImageName(imageName);
             String url_docker = "/image/";
             if (System.getenv("IMAGE_STORE_PATH") != null){
