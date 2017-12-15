@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
     wildfly:
@@ -20,6 +20,8 @@ services:
         restart: always
         ports:
             - "6379:6379"
+        volumes:
+            - redis-data:/data
 
     php-redis-admin:
         image: faktiva/php-redis-admin
@@ -40,6 +42,8 @@ services:
             - "8070:80"
         volumes:
             - image-data:/usr/local/apache2/htdocs/
+            - ./config/:/usr/local/apache2/htdocs/
 
 volumes:
   image-data:
+  redis-data:

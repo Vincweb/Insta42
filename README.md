@@ -10,6 +10,7 @@ Contributeur :
 
 Pour build le projet
 ```
+$ mvn archetype:generate -DgroupId=com.td.insta -DartifactId=front-app -DarchetypeGroupId=org.wildfly.archetype -DarchetypeArtifactId=wildfly-javaee7-webapp-archetype -DarchetypeVersion=8.2.0.Final
 $ mvn clean package
 ```
 
@@ -18,8 +19,7 @@ $ mvn clean package
 Lancement du serveur Wildfly
 ```
 $ cd docker
-$ docker-compose build --force
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 Accessible port localhost:8080
