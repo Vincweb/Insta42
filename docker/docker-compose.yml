@@ -20,6 +20,8 @@ services:
         restart: always
         ports:
             - "6379:6379"
+        volumes:
+            - redis-data:/data
 
     php-redis-admin:
         image: faktiva/php-redis-admin
@@ -44,3 +46,4 @@ services:
 
 volumes:
   image-data:
+  redis-data:
