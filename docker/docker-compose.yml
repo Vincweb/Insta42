@@ -8,7 +8,7 @@ services:
         ports:
             - "8080:8080"
         environment:
-            - IMAGE_STORE_PATH=/image
+            - IMAGE_STORE_PATH=/image/
         volumes:
             - image-data:/image
         links:
