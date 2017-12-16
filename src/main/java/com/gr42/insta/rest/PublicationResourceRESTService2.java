@@ -42,7 +42,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
         * <p/>
         * This class produces a RESTful service to read/write the contents of the members table.
         */
-@Path("/test")
+@Path("/publications")
 @RequestScoped
 public class PublicationResourceRESTService2 {
 
@@ -82,8 +82,8 @@ public class PublicationResourceRESTService2 {
             publications.updateImageName(pub);
             
             
-         //   SpringRedisExample test = new  SpringRedisExample();
-         //   test.test();
+            SpringRedisExample test = new  SpringRedisExample();
+            test.test();
 
             
         } finally {
