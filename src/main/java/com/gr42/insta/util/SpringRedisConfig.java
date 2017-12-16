@@ -12,7 +12,7 @@ public class SpringRedisConfig {
 	@Bean
 	public JedisConnectionFactory connectionFactory() {
 		JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
-		connectionFactory.setHostName("192.168.99.100");
+		connectionFactory.setHostName("redis");
 		connectionFactory.setPort(6379);
 		return connectionFactory;
 	}
