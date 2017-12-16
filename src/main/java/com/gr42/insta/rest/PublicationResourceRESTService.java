@@ -45,16 +45,9 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 public class PublicationResourceRESTService {
 
     @Inject
-    private Logger log;
-
-    @Inject
-    private Validator validator;
-
-    @Inject
     PublicationManager publications;
 
-    private String IMAGE_STORAGE_FILE = "\\welcomePublication/";
-    private String IMAGE_URL = "http://192.168.99.100:8070";
+    private String IMAGE_URL = "http://localhost:8070";
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -82,6 +75,7 @@ public class PublicationResourceRESTService {
         }
         return pub;
     }
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<Publication> listAllPublications() {

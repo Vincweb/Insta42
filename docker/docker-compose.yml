@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
     wildfly:
@@ -10,7 +10,7 @@ services:
         environment:
             - IMAGE_STORE_PATH=/image/
         volumes:
-            - image-data:/image
+            - image-data:/image/
         links:
             - redis:redis
 
@@ -42,7 +42,6 @@ services:
             - "8070:80"
         volumes:
             - image-data:/usr/local/apache2/htdocs/
-            - ../config/:/usr/local/apache2/htdocs/
 
 volumes:
   image-data:

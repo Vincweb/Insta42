@@ -19,7 +19,8 @@ $ mvn clean package
 Lancement du serveur Wildfly
 ```
 $ cd docker
-$ docker-compose up --build
+$ docker-compose up -d --build
+$ docker-compose down -v
 ```
 
 Accessible port localhost:8080
