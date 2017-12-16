@@ -3,7 +3,7 @@ version: '3'
 services:
     wildfly:
         build: ../
-        container_name: wildfly42
+        container_name: front-app42
         restart: always
         ports:
             - "8080:8080"
@@ -42,7 +42,6 @@ services:
             - "8070:80"
         volumes:
             - image-data:/usr/local/apache2/htdocs/
-            - ../config/:/usr/local/apache2/htdocs/
 
 volumes:
   image-data:
