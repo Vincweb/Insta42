@@ -39,9 +39,6 @@ public class PublicationManager {
 
     }
 
-
-
-
     public Collection<Publication> findAllPublication() {
         Query query = em.createQuery("SELECT p FROM Publication p");
         return (Collection<Publication>) query.getResultList();
