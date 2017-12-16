@@ -1,10 +1,8 @@
 package com.gr42.insta.service;
 
-import com.gr42.insta.model.Member;
 import com.gr42.insta.model.Publication;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -21,9 +19,6 @@ public class PublicationManager {
     @Inject
     private EntityManager em;
 
-    @Inject
-    private Event<Member> memberEventSrc;
-
     public long store(Publication pub) throws Exception {
         log.info("Storing Publication");
         em.persist(pub);
@@ -35,12 +30,9 @@ public class PublicationManager {
         newpub.setImageName(pub.getImageName());
         newpub.setImage(pub.getImage());
         em.merge(newpub);
-        log.info("Storing Publication ddddd11");
+        log.info("Storing Publication");
 
     }
-
-
-
 
     public Collection<Publication> findAllPublication() {
         Query query = em.createQuery("SELECT p FROM Publication p");

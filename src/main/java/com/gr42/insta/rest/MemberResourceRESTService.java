@@ -43,6 +43,7 @@ import javax.ws.rs.core.Response;
 import com.gr42.insta.data.MemberRepository;
 import com.gr42.insta.model.Member;
 import com.gr42.insta.service.MemberRegistration;
+import com.gr42.insta.service.SpringRedisMemberRegistration;
 
 /**
  * JAX-RS Example
@@ -119,6 +120,9 @@ public class MemberResourceRESTService {
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
         }
 
+        // Enregistrement Redis
+        new  SpringRedisMemberRegistration(member);
+        
         return builder.build();
     }
 

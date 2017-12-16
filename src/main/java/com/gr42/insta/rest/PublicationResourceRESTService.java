@@ -25,13 +25,11 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
