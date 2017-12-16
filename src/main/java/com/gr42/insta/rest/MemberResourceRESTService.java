@@ -121,6 +121,8 @@ public class MemberResourceRESTService {
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
         }
 
+        
+        //redis 
         SpringRedisExample test = new  SpringRedisExample();
         try {
 			test.test(member.getId(),member.getName(),member.getEmail(),member.getPhoneNumber());
@@ -131,6 +133,9 @@ public class MemberResourceRESTService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        
+        
         return builder.build();
     }
 
