@@ -16,6 +16,7 @@
  */
 package com.gr42.insta.rest;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +44,7 @@ import javax.ws.rs.core.Response;
 import com.gr42.insta.data.MemberRepository;
 import com.gr42.insta.model.Member;
 import com.gr42.insta.service.MemberRegistration;
+import com.gr42.insta.util.SpringRedisExample;
 
 /**
  * JAX-RS Example
@@ -119,6 +121,16 @@ public class MemberResourceRESTService {
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
         }
 
+        SpringRedisExample test = new  SpringRedisExample();
+        try {
+			test.test(member.getId(),member.getName(),member.getEmail(),member.getPhoneNumber());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return builder.build();
     }
 

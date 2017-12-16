@@ -19,6 +19,8 @@ package com.gr42.insta.rest;
 
 import com.gr42.insta.model.Publication;
 import com.gr42.insta.service.PublicationManager;
+import com.gr42.insta.util.SpringRedisExample;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -61,6 +63,8 @@ public class PublicationResourceRESTService {
     @Produces(MediaType.APPLICATION_JSON)
     public Publication createPublication(@MultipartForm MultipartFormDataInput request) throws Exception {
         Publication pub = new Publication();
+        SpringRedisExample test = new  SpringRedisExample();
+
         byte[] img = null;
         try {
             pub.setComment(request.getFormDataMap().get("comment").get(0).getBodyAsString());
@@ -78,6 +82,10 @@ public class PublicationResourceRESTService {
             pub.setImage(IMAGE_URL+"/"+imageName);
             FileUtils.writeByteArrayToFile(new File(url_docker+imageName), img);
             publications.updateImageName(pub);
+            
+        //    test.test();
+
+            
         } finally {
         }
         return pub;
