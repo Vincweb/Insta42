@@ -12,11 +12,10 @@ public class SpringRedisConfig {
 	@Bean
 	public JedisConnectionFactory connectionFactory() {
 		JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
-		connectionFactory.setHostName("localhost");
+		connectionFactory.setHostName("192.168.99.100");
 		connectionFactory.setPort(6379);
 		return connectionFactory;
 	}
-
 
 	@Bean
 	public RedisTemplate redisTemplate() {
@@ -25,7 +24,7 @@ public class SpringRedisConfig {
 		redisTemplate.setConnectionFactory(connectionFactory());
 		return redisTemplate;
 	}
-
+	
 	@Bean
 	public StringRedisTemplate strRedisTemplate() {
 		StringRedisTemplate redisTemplate = new StringRedisTemplate();
