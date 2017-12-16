@@ -35,7 +35,7 @@ public class PublicationManager {
         newpub.setImageName(pub.getImageName());
         newpub.setImage(pub.getImage());
         em.merge(newpub);
-        log.info("Storing Publication ddddd11");
+        log.info("Storing Publication");
 
     }
 

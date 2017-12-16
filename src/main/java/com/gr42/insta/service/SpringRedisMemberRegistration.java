@@ -1,44 +1,32 @@
-package com.gr42.insta.util;
+package com.gr42.insta.service;
 
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
-import javax.inject.Inject;
-
+import com.gr42.insta.model.Member;
+import com.gr42.insta.util.SpringRedisConfig;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-public class SpringRedisExample {
+public class SpringRedisMemberRegistration {
 
-	@Inject
-	private Logger log;
-
-	public SpringRedisExample() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public void test(Long id, String name, String email, String phone) throws URISyntaxException, Exception {
+	public SpringRedisMemberRegistration(Member member) {
 
 		ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext(SpringRedisConfig.class);
 		try {
-			String id1 = id.toString();
 			StringRedisTemplate redisTemplate = (StringRedisTemplate) ctx.getBean("strRedisTemplate");
 			HashOperations<String, String, String> hash = redisTemplate.opsForHash();
-			String idkey = "user:" + id.toString();
+			String idkey = "user:" + member.getId().toString();
 
 			Map<String, String> memMap = new HashMap<>();
-			memMap.put("id", id.toString());
-			memMap.put("name", name);
-			memMap.put("email", email);
-			memMap.put("phoneNumber", phone);
+			memMap.put("id", member.getId().toString());
+			memMap.put("name", member.getName());
+			memMap.put("email", member.getEmail());
+			memMap.put("phoneNumber", member.getPhoneNumber());
 
 			hash.putAll(idkey, memMap);
-
-			System.out.println("Get emp joe details: " + hash.entries(idkey));
 
 		} finally {
 			ctx.close();

@@ -22,16 +22,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
@@ -47,7 +40,7 @@ public class Publication implements Serializable {
 
     private String comment;
 
-
+    private String createur;
 
     @Column(name = "image")
     private String image;
@@ -82,5 +75,14 @@ public class Publication implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+
+    public String getCreateur() {
+        return createur;
+    }
+
+    public void setCreateur(String createur) {
+        this.createur = createur;
     }
 }

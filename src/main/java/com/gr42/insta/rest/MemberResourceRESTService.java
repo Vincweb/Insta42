@@ -44,7 +44,7 @@ import javax.ws.rs.core.Response;
 import com.gr42.insta.data.MemberRepository;
 import com.gr42.insta.model.Member;
 import com.gr42.insta.service.MemberRegistration;
-import com.gr42.insta.util.SpringRedisExample;
+import com.gr42.insta.service.SpringRedisMemberRegistration;
 
 /**
  * JAX-RS Example
@@ -84,9 +84,6 @@ public class MemberResourceRESTService {
         return member;
     }
 
-
-
-
     /**
      * Creates a new member from the values provided. Performs validation, and will return a JAX-RS response with either 200 ok,
      * or with a map of fields, and related errors.
@@ -123,19 +120,14 @@ public class MemberResourceRESTService {
 
         
         //redis 
-        SpringRedisExample test = new  SpringRedisExample();
+
         try {
-			test.test(member.getId(),member.getName(),member.getEmail(),member.getPhoneNumber());
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            new SpringRedisMemberRegistration(member);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        
-        
+
         return builder.build();
     }
 

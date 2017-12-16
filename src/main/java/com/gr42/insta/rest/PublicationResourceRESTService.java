@@ -19,55 +19,52 @@ package com.gr42.insta.rest;
 
 import com.gr42.insta.model.Publication;
 import com.gr42.insta.service.PublicationManager;
-import com.gr42.insta.util.SpringRedisExample;
 
+import com.gr42.insta.service.SpringRedisPublicationRegistration;
+import com.gr42.insta.util.SpringRedisConfig;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * JAX-RS Example
-        * <p/>
-        * This class produces a RESTful service to read/write the contents of the members table.
-        */
+ * <p/>
+ * This class produces a RESTful service to read/write the contents of the members table.
+ */
 @Path("/publications")
 @RequestScoped
 public class PublicationResourceRESTService {
 
     @Inject
-    private Logger log;
-
-    @Inject
-    private Validator validator;
-
-    @Inject
     PublicationManager publications;
-
-    private String IMAGE_STORAGE_FILE = "\\welcomePublication/";
-    private String IMAGE_URL = "http://192.168.99.100:8070";
+    private String IMAGE_URL = "http://localhost:8070";
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Publication createPublication(@MultipartForm MultipartFormDataInput request) throws Exception {
         Publication pub = new Publication();
-        SpringRedisExample test = new  SpringRedisExample();
 
         byte[] img = null;
         try {
             pub.setComment(request.getFormDataMap().get("comment").get(0).getBodyAsString());
+            pub.setCreateur(request.getFormDataMap().get("createur").get(0).getBodyAsString());
             long id = publications.store(pub);
             InputStream inputStream = request.getFormDataMap().get("image").get(0).getBody(InputStream.class, null);
             if (inputStream.available() != 0)
@@ -75,21 +72,21 @@ public class PublicationResourceRESTService {
             String imageName = "publication-" + id + ".jpg"; // System.currentTimeMillis()
             pub.setImageName(imageName);
             String url_docker = "/image/";
-            if (System.getenv("IMAGE_STORE_PATH") != null){
+            if (System.getenv("IMAGE_STORE_PATH") != null) {
                 url_docker = System.getenv("IMAGE_STORE_PATH");
             }
 
-            pub.setImage(IMAGE_URL+"/"+imageName);
-            FileUtils.writeByteArrayToFile(new File(url_docker+imageName), img);
+            pub.setImage(IMAGE_URL + "/" + imageName);
+            FileUtils.writeByteArrayToFile(new File(url_docker + imageName), img);
+            new SpringRedisPublicationRegistration(pub);
             publications.updateImageName(pub);
-            
-        //    test.test();
 
-            
         } finally {
+
         }
         return pub;
     }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<Publication> listAllPublications() {
